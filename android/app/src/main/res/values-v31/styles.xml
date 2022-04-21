@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- アプリ起動時のテーマ -->
+    <!-- スプラッシュの背景色などを指定 -->
+    <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowFullscreen">false</item>
+        <!-- <item name="android:windowSplashScreenBackground">@color/launch_background</item> -->
+    </style>
+    <!-- Flutter UI初期化まで表示されるテーマ -->
+    <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowBackground">?android:colorBackground</item>
+    </style>
+</resources>
