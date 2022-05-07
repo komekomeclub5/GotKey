@@ -17,9 +17,9 @@ class SeasonFilter extends StatefulWidget {
 
 class SeasonFilterState extends State<SeasonFilter> {
   final List<ActorFilterEntry> _cast = <ActorFilterEntry>[
-    const ActorFilterEntry('前期', ''),
+    const ActorFilterEntry('前期', '前期'),
     // const ActorFilterEntry('後期', ''),
-    const ActorFilterEntry('通年', ''),
+    const ActorFilterEntry('通年', '通年'),
   ];
   // final List<String> _filters = <String>[];
 
@@ -29,19 +29,24 @@ class SeasonFilterState extends State<SeasonFilter> {
       return Padding(
         padding: const EdgeInsets.only(right: 4.5),
         child: FilterChip(
-          //avatar: CircleAvatar(child: Text(actor.initials)),
-          label: Text(actor.name),
-          shape: RoundedRectangleBorder(
-              side: const BorderSide(width: 2, color: Color(0xff707070)),
-              borderRadius: BorderRadius.circular(10)),
-          backgroundColor: Colors.white,
+          label: Text(actor.name,
+              style: TextStyle(
+                  color:
+                      filter.getSeason() == actor.value ? Colors.black : null)),
+          labelPadding:
+              const EdgeInsets.only(left: 30, right: 30, top: 4, bottom: 4),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          backgroundColor: Theme.of(context).bottomAppBarColor,
+          shadowColor: Colors.black45,
+          elevation: filter.getSeason() == actor.value ? 0 : 3,
           selectedColor: const Color(0xfff8d395),
-          selected: filter.getSeason() == actor.name,
+          selected: filter.getSeason() == actor.value,
           showCheckmark: false,
           onSelected: (bool value) {
             setState(() {
               if (value) {
-                filter.setSeason(actor.name);
+                filter.setSeason(actor.value);
               } else {
                 filter.rmSeason();
               }

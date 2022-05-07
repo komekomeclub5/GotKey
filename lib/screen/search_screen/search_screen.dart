@@ -51,71 +51,70 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     final filter = Provider.of<SearchFilterProvider>(context);
     return Scaffold(
-        //appBar: AppBar(
-        //  elevation: 0,
-        //  backgroundColor: Colors.white.withOpacity(0.0),
-        // title: Text(widget.title),
-        //),
+        appBar: AppBar(
+          title: const Text('講義を追加する',
+              style: TextStyle(fontWeight: FontWeight.w600)),
+        ),
         body: SafeArea(
             child: SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.only(top: 30, left: 15, right: 15),
-        child: Column(
-          children: [
-            top(context),
-            const CourseFilter(),
-            // const TypeFilter(), // 特例授業がある場合に使用する
-            const SeasonFilter(),
-            const DayFilter(),
-            const TimeFilter(),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: ElevatedButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SearchResultScreen(
-                      title: '検索結果',
-                      days: filter.getDays().join(),
-                      times: filter.getTimes().join(),
-                      type: filter.getType(),
-                      course: filter.getCourse(),
-                      season: filter.getSeason(),
+          child: Container(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: Column(
+              children: [
+                top(context),
+                const CourseFilter(),
+                // const TypeFilter(), // 特例授業がある場合に使用する
+                const SeasonFilter(),
+                const DayFilter(),
+                const TimeFilter(),
+                Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SearchResultScreen(
+                          title: '検索結果',
+                          days: filter.getDays().join(),
+                          times: filter.getTimes().join(),
+                          type: filter.getType(),
+                          course: filter.getCourse(),
+                          season: filter.getSeason(),
+                        ),
+                      ),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.only(left: 25, right: 25),
+                      child: Text('検索結果を見る'),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color(0xffff7447),
+                      onPrimary: Colors.white,
+                      shape: const StadiumBorder(),
                     ),
                   ),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 15, right: 15),
-                  child: Text('検索結果を見る'),
+                Container(
+                  padding: const EdgeInsets.only(top: 20),
+                  width: double.infinity,
+                  child: Text(
+                    '時間割データ: $_version',
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(fontSize: 10),
+                  ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  primary: const Color(0xffff7447),
-                  onPrimary: Colors.white,
-                  shape: const StadiumBorder(),
+                const SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    '曜日・時間・教室の変更、または閉講・休講の可能性があります！\n随時沖国大ポータルまたは学内の掲示板で最新の情報を確認して下さい。',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 10),
+                  ),
                 ),
-              ),
+              ],
             ),
-            Container(
-              padding: const EdgeInsets.only(top: 20),
-              width: double.infinity,
-              child: Text(
-                '時間割データ: $_version',
-                textAlign: TextAlign.left,
-                style: const TextStyle(color: Colors.black26, fontSize: 10),
-              ),
-            ),
-            const SizedBox(
-              width: double.infinity,
-              child: Text(
-                '曜日・時間・教室の変更、または閉講・休講の可能性があります！\n随時沖国大ポータルまたは学内の掲示板で最新の情報を確認して下さい。',
-                textAlign: TextAlign.left,
-                style: TextStyle(color: Colors.black26, fontSize: 10),
-              ),
-            ),
-          ],
-        ),
-      ),
-    )));
+          ),
+        )));
   }
 }
 

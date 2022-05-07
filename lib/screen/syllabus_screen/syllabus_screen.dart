@@ -48,7 +48,7 @@ class _SyllabusScreenState extends State<SyllabusScreen> {
           'teacher': widget.teacher,
         });
 
-    print(uri);
+    //print(uri);
 
     final response = await http.get(uri);
 
@@ -88,30 +88,37 @@ class _SyllabusScreenState extends State<SyllabusScreen> {
       'classroom': widget.classroom,
     };
     return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: const Text('シラバスが\n見つかりませんでした🙏'),
-      action: SnackBarAction(
-        label: myTimeTable.onTheTimetable(course) ? '- 時間割から削除' : '+ 時間割に追加',
-        onPressed: () {
-          if (myTimeTable.onTheTimetable(course)) {
-            myTimeTable.removeTimetable(course);
-          } else {
-            myTimeTable.addTimetable(course);
-          }
-        },
-      ),
-    ));
+        content: Row(
+      children: [
+        const Expanded(child: Text('シラバスが\n見つかりませんでした🙏')),
+        TextButton(
+            onPressed: (() {
+              if (myTimeTable.onTheTimetable(course)) {
+                myTimeTable.removeTimetable(course);
+              } else if (myTimeTable.dupulicateTimetable(course) == false) {
+                myTimeTable.addTimetable(course);
+              }
+            }),
+            child: myTimeTable.onTheTimetable(course)
+                ? const Text(
+                    '- 時間割から削除',
+                    style: TextStyle(color: Colors.red),
+                  )
+                : myTimeTable.dupulicateTimetable(course)
+                    ? const Text('重複してます',
+                        style: TextStyle(color: Colors.black54))
+                    : const Text('+ 時間割に追加',
+                        style: TextStyle(color: Colors.blue))),
+      ],
+    )));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: const Text('シラバス',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700)),
-        iconTheme: const IconThemeData(color: Colors.black),
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        title:
+            const Text('シラバス', style: TextStyle(fontWeight: FontWeight.w600)),
       ),
       body: Container(
         padding: const EdgeInsets.only(left: 15.0, right: 15.0),
@@ -149,13 +156,21 @@ class _SyllabusScreenState extends State<SyllabusScreen> {
               onPressed: () {
                 if (myTimeTable.onTheTimetable(course)) {
                   myTimeTable.removeTimetable(course);
-                } else {
+                } else if (myTimeTable.dupulicateTimetable(course) == false) {
                   myTimeTable.addTimetable(course);
                 }
               },
               child: myTimeTable.onTheTimetable(course)
-                  ? const Text('- 時間割から削除')
-                  : const Text('+ 時間割に追加'),
+                  ? const Text(
+                      '- 時間割から削除',
+                      style: TextStyle(color: Colors.red),
+                    )
+                  : myTimeTable.dupulicateTimetable(course)
+                      ? Text(
+                          '${course['day']}${course['time']}と重複してます...🥺\n削除してから追加してください。',
+                          style: const TextStyle(color: Colors.black54))
+                      : const Text('+ 時間割に追加',
+                          style: TextStyle(color: Colors.blue)),
             ),
           ),
           SyllabusContentsB(contents: syllabus),

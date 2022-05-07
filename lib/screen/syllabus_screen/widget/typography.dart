@@ -15,7 +15,6 @@ class SyllabusTitle extends StatelessWidget {
       child: Text(
         value,
         style: const TextStyle(
-          color: Color(0xff4c4c4c),
           fontSize: 25,
           fontWeight: FontWeight.w700,
         ),
@@ -44,7 +43,6 @@ class Heading extends StatelessWidget {
         child: Text(
           value,
           style: const TextStyle(
-            color: Color(0xff4c4c4c),
             fontSize: 20,
             fontWeight: FontWeight.w700,
           ),

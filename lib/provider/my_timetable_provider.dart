@@ -1,7 +1,7 @@
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class MyTimetableProvider with ChangeNotifier {
   List<Map<String, String>> timetable = [];
@@ -86,7 +86,7 @@ class MyTimetableProvider with ChangeNotifier {
         count++;
       }
     }
-    return count > 1 ? true : false;
+    return count > 0 ? true : false;
   }
 
   List<Map<String, String>> getTimetable() {

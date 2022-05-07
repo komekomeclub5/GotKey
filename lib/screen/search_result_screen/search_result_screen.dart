@@ -83,20 +83,11 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
         title: Text(widget.title,
-            style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.w700)),
-        iconTheme: const IconThemeData(color: Colors.black),
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+            style: const TextStyle(fontWeight: FontWeight.w600)),
         actions: const [SelectSort()],
       ),
-      body: Center(
-        child: Column(children: <Widget>[
-          Expanded(child: result(timetable)),
-        ]),
-      ),
+      body: result(timetable),
     );
   }
 
@@ -117,6 +108,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
       return const Text("読み込み中・・・", textAlign: TextAlign.center);
     } else {
       return ListView.builder(
+          //shrinkWrap: true,
+          //physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
               child: ResultList(

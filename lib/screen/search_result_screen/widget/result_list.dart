@@ -23,11 +23,18 @@ class ResultList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 5, bottom: 5, left: 15, right: 15),
+      margin: const EdgeInsets.only(top: 12, left: 15, right: 15),
       decoration: BoxDecoration(
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            spreadRadius: 0.1,
+            blurRadius: 2.0,
+            offset: Offset(0, 3),
+          )
+        ],
         borderRadius: BorderRadius.circular(10.0),
-        color: Colors.white,
-        border: Border.all(width: 2.0, color: const Color(0xff707070)),
+        color: Theme.of(context).bottomAppBarColor,
       ),
       child: Container(
         margin: const EdgeInsets.all(12.0),
@@ -42,8 +49,7 @@ class ResultList extends StatelessWidget {
                       courseTitle,
                       style: const TextStyle(
                         fontSize: 16,
-                        color: Color(0xff4c4c4c),
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w600,
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -54,7 +60,6 @@ class ResultList extends StatelessWidget {
                       '$day$time　$teacher　$classroom　$additionalInformation',
                       style: const TextStyle(
                         fontSize: 12,
-                        color: Color(0xff4c4c4c),
                       ),
                       textAlign: TextAlign.left,
                     ),

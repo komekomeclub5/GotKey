@@ -32,13 +32,19 @@ class DayFilterState extends State<DayFilter> {
       return Padding(
         padding: const EdgeInsets.only(right: 4.5),
         child: FilterChip(
-          //avatar: CircleAvatar(child: Text(actor.initials)),
           padding: const EdgeInsets.only(left: 9, right: 9),
-          label: Text(actor.name),
-          shape: RoundedRectangleBorder(
-              side: const BorderSide(width: 2, color: Color(0xff707070)),
-              borderRadius: BorderRadius.circular(10)),
-          backgroundColor: Colors.white,
+          label: Text(actor.name,
+              style: TextStyle(
+                  color: filter.getDays().contains(actor.name)
+                      ? Colors.black
+                      : null)),
+          labelPadding:
+              const EdgeInsets.only(left: 10, right: 10, top: 4, bottom: 4),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          backgroundColor: Theme.of(context).bottomAppBarColor,
+          shadowColor: Colors.black45,
+          elevation: filter.getDays().contains(actor.name) ? 0 : 3,
           selectedColor: const Color(0xfff8d395),
           selected: filter.getDays().contains(actor.name),
           showCheckmark: false,

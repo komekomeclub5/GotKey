@@ -41,21 +41,30 @@ class CourseFilterState extends State<CourseFilter> {
               ),
               margin: const EdgeInsets.only(top: 10),
               decoration: BoxDecoration(
-                border: Border.all(width: 2, color: const Color(0xff707070)),
+                color: Theme.of(context).bottomAppBarColor,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    spreadRadius: 0.1,
+                    blurRadius: 2.0,
+                    offset: Offset(0, 3),
+                  )
+                ],
                 borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               ),
               child: SizedBox(
-                  height: 40,
+                  height: 45,
                   width: double.infinity,
                   child: DropdownButton<String>(
                     isExpanded: true,
                     value: dropdownValue,
-                    icon: const Icon(Icons.arrow_downward),
+                    icon: const Icon(Icons.expand_more),
                     elevation: 16,
-                    style: const TextStyle(fontSize: 14, color: Colors.black87),
+                    style: Theme.of(context).primaryTextTheme.titleSmall,
                     underline: Container(
                       height: 0,
                     ),
+                    dropdownColor: Theme.of(context).primaryColor,
                     onChanged: (String? newValue) {
                       setState(() {
                         dropdownValue = newValue!;

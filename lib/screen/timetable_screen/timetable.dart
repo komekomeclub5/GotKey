@@ -3,9 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:timetable/provider/my_timetable_provider.dart';
 import 'package:timetable/provider/day_selected_provider.dart';
 import 'package:timetable/screen/timetable_screen/widget/my_timetable_list.dart';
-import 'package:timetable/screen/timetable_screen/widget/day_selected_chip.dart';
-import 'package:timetable/screen/timetable_screen/widget/timetable_top.dart';
 import 'package:timetable/screen/syllabus_screen/syllabus_screen.dart';
+
+import 'package:timetable/screen/timetable_screen/widget/my_timetable.dart';
+import 'package:timetable/screen/search_screen/search_screen.dart';
 
 class TimeTableScreen extends StatefulWidget {
   const TimeTableScreen({Key? key, required this.title}) : super(key: key);
@@ -18,20 +19,24 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 30, left: 15, right: 15),
-              child: timetabletop(context),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 10),
-              child: DaySelectChip(),
-            ),
-            todayTimetable(context),
-          ]),
+      appBar: AppBar(
+        title: const Text(
+          '時間割',
+          style: TextStyle(fontWeight: FontWeight.w600),
         ),
+      ),
+      body: MyTimetable(),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (BuildContext context) {
+            return const SearchScreen(title: '講義検索');
+          }));
+        },
+        label: const Text('追加'),
+        icon: const Icon(Icons.add),
+        backgroundColor: const Color(0xffff7447),
+        foregroundColor: Colors.white,
       ),
     );
   }
